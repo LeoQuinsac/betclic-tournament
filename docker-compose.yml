@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  tournament-betclic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080" # Maps the Ktor app's port
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017" # Exposes MongoDB port
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

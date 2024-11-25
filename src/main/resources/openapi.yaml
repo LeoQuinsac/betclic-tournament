@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: Tournament API
+  description: API for managing players and tournament data.
+  version: 1.0.0
+tags:
+  - name: Tournament
+
+paths:
+  /player/{username}:
+    post:
+      tags:
+        - Tournament
+      summary: Create a new player
+      operationId: createPlayer
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: The username of the player to create.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully created a new player
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '500':
+          description: Error while creating the player
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Error while creating new player with username: {username}"
+
+  /player/{id}:
+    get:
+      tags:
+        - Tournament
+      summary: Get a player by ID
+      operationId: getPlayerById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the player to retrieve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully retrieved the player
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '404':
+          description: Player not found
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "getPlayer"
+
+  /player/{id}/score:
+    patch:
+      tags:
+        - Tournament
+      summary: Update the player's score
+      operationId: updatePlayerScore
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The ID of the player whose score is to be updated.
+          schema:
+            type: string
+        - name: score
+          in: query
+          required: true
+          description: The new score of the player.
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successfully updated the player's score
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          description: Invalid score provided
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Invalid player score"
+        '500':
+          description: Error while updating the player's score
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Error while updating player {id} score"
+
+  /players:
+
+    get:
+      tags:
+        - Tournament
+      summary: Retrieve a list of all players
+      operationId: getPlayers
+      responses:
+        '200':
+          description: Successfully retrieved the list of players
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+        '500':
+          description: Error while retrieving players
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Error while retrieving players"
+
+    delete:
+      tags:
+        - Tournament
+      summary: Delete all players
+      operationId: deletePlayers
+      responses:
+        '204':
+          description: Successfully deleted all players
+        '500':
+          description: Error while deleting players
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Error while deleting players"
+
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the player
+        username:
+          type: string
+          description: Username of the player
+        score:
+          type: integer
+          description: Score of the player       
+        rank:
+          type: integer
+          description: Score of the player
+      required:
+        - id
+        - username
+        - score

@@ -1,0 +1,11 @@
+ktor:
+    application:
+        modules:
+            - com.tournament.ApplicationKt.module
+    deployment:
+        port: 8080
+
+mongo:
+    uri: "mongodb://localhost:27017"
+    db:
+        name: "players"
