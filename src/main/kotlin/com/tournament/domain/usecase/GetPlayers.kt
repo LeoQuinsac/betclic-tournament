@@ -5,7 +5,7 @@ import com.tournament.domain.logger.PlayerLogger
 import com.tournament.domain.repository.PlayerRepository
 
 class GetPlayers(private val repository: PlayerRepository,
-                 private val logger: PlayerLogger) : UseCase<Int, UseCaseResponse<List<Player>>>() {
+                 private val logger: PlayerLogger) : UseCase<Int, UseCaseResponse<List<Player>>> {
     override suspend fun execute(id: Int?): UseCaseResponse<List<Player>> {
         return try {
             val player = repository.getPlayers()

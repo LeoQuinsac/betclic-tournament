@@ -5,7 +5,7 @@ import com.tournament.domain.repository.PlayerRepository
 
 class DeletePlayers(private val repository: PlayerRepository,
                     private val logger: PlayerLogger
-) : UseCase<String, UseCaseResponse<Boolean>>() {
+) : UseCase<String, UseCaseResponse<Boolean>> {
     override suspend fun execute(arg: String?): UseCaseResponse<Boolean> {
         return try {
             if (repository.deletePlayers()) {

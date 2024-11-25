@@ -13,7 +13,7 @@
 out/
 /tmp
 /intellij
-workspace.xml
+/.idea/workspace.xml
 *.versionsBackup
 /idea/testData/debugger/tinyApp/classes*
 /jps-plugin/testData/kannotator
@@ -59,3 +59,4 @@ outTmp/
 kotlin-ide/
 .kotlin/
 .teamcity/
+

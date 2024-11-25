@@ -5,7 +5,7 @@ import com.tournament.domain.logger.PlayerLogger
 import com.tournament.domain.repository.PlayerRepository
 
 class UpdatePlayerScore(private val repository: PlayerRepository,
-                        private val logger: PlayerLogger) : UseCase<Pair<String, Int>, UseCaseResponse<Player>>() {
+                        private val logger: PlayerLogger) : UseCase<Pair<String, Int>, UseCaseResponse<Player>> {
     override suspend fun execute(pairIdScore: Pair<String, Int>?): UseCaseResponse<Player> {
         return try {
             val player = repository.updatePlayerScore(pairIdScore!!.first, pairIdScore.second)

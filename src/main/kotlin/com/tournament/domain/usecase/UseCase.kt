@@ -1,7 +1,7 @@
 package com.tournament.domain.usecase
 
-abstract class UseCase<A : Any?, R : Any> {
-    abstract suspend fun execute(arg: A? = null): R
+interface UseCase<A : Any?, R : Any> {
+    suspend fun execute(arg: A? = null): R
 }
 
 sealed class UseCaseResponse<out T> {
